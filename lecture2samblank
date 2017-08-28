@@ -1,0 +1,47 @@
+import numpy as np
+import xlrd
+import xlsxwriter as xlw
+
+workbook = xlrd.open_workbook('NYGas')
+
+sh = workbook.sheet_by_index(1)
+
+prices = []
+
+for i in range(10,369):
+    
+    value = sh.cell_value(i,1)
+    prices.append(value)
+    
+yearly_average = []
+
+start = 0
+
+
+for i in range(0,30):
+    avg = np.mean(prices[start:start+12])
+    yearly_average = np.append(yearly_average,avg)
+    start += 12
+    
+finalData = np.zeros((30,2))
+np.transpose(yearly_average)
+
+finalData[0:30,0]= 1987+np.arange(30)
+finalData[0:30,1] = yearly_average
+    
+workbook2 = xlw.Workbook('YearlyAverage.xlsx')
+worksheet = workbook2.add_worksheet()
+
+
+
+row = 1
+col = 0
+worksheet.write(col,0,'Year')
+worksheet.write(col,1,'Average Price')
+
+for item, price in (finalData):
+    worksheet.write(row,col,item)
+    worksheet.write(row,col+1,price)
+    row += 1
+    
+workbook2.close()
