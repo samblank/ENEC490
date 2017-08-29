@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Aug 29 14:21:54 2017
+
+@author: SamBlank
+"""
+
+import numpy as np
+import xlrd
+import xlsxwriter as xlw
+
+workbook=xlrd.open_workbook('NG73-17.xls')
+
+sh = workbook.sheet_by_index(1)
+prices = []
+
+for i in range(3,249):
+    
+    value = sh.cell_value(i,1)
+    prices.append(value)
+
+
+
+def annualProfile(vector):
+    years = int(len(vector)/12)
+    m = np.zeros(12,years)
+    for i in np.arange(years):
+        for j in np.arange(12):
+            m[j,i] = vector((i)*12+j)
+
+annualProfile(prices)
