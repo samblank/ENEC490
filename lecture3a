@@ -38,11 +38,9 @@ x = annual_profile(df_data)
 
 def monthly_stats(stuff):
     output = np.zeros((12,2))
-    for i in range(0,1):
-        for j in range(0,12):
-            if i==0:
-                output[j,i] = np.average(stuff[j,:])
-            else:
-                output[j,i] = np.std(stuff[j,:])
+    for j in range(0,12):
+        output[j,0] = np.average(stuff[j,:])
+        output[j,1] = np.std(stuff[j,:])
+    return output
 
 y = monthly_stats(x)
