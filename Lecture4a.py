@@ -98,13 +98,26 @@ for i in range(0,sim_years):
 plt.figure()
 #bootstrap sample
 plt.plot(bootstrap_sample)
-plt.xlabel('Year',fontsize=30)
+plt.xlabel('Months',fontsize=30)
 plt.ylabel('Demand (MWh)',fontsize=30)
 
 plt.figure()
 #autocorrelation
 autocorrelation_plot(x,c=np.random.rand(3,1))
-plt.xlabel('Months',fontsize=30)
+plt.xlabel('Months',fontsize= 30)
 plt.ylabel('Autocorrelation',fontsize=30)
 
+#monte carlo
+sim_years = 10
+bootstrap_sample = np.zeros((12*sim_years,1))
+for i in range(0,sim_years):
+    for j in range(0,12):
+        s = int(np.ceil(sim_years*np.random.normal()))
+        bootstrap_sample[i*12+j] = x[j,s]
 
+
+plt.figure()
+#bootstrap sample
+plt.plot(bootstrap_sample)
+plt.xlabel('Months',fontsize=30)
+plt.ylabel('Demand (MWh)',fontsize=30)
