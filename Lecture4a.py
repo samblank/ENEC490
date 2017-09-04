@@ -114,7 +114,7 @@ for i in range(0,sim_years):
     for j in range(0,12):
         s = int(np.ceil(sim_years*np.random.normal()))
         bootstrap_sample[i*12+j] = x[j,s]
-
+#RIGHT ABOVE HERE JORDAN
 
 plt.figure()
 #bootstrap sample
