@@ -110,10 +110,23 @@ plt.ylabel('Autocorrelation',fontsize=30)
 #monte carlo
 sim_years = 10
 bootstrap_sample = np.zeros((12*sim_years,1))
+
+# Sam, I'd make use of your monthly stats function from Lecture 3
+#monthly stats function
+def monthly_stats(x):
+    output = np.zeros((12,2))
+    for j in range(0,12):       
+        output[j,0] = np.average(x[j,:])
+        output[j,1] = np.std(x[j,:])
+                
+    return output
+
+s = monthly_stats(x)
+
 for i in range(0,sim_years):
     for j in range(0,12):
-        s = int(np.ceil(sim_years*np.random.normal()))
-        bootstrap_sample[i*12+j] = x[j,s]
+        # Use monthly stats (mean, std. deviation) to simulate a random value for each calendar month
+        bootstrap_sample[i*12+j] = s[] + s[]*np.random.randn()
 #RIGHT ABOVE HERE JORDAN
 
 plt.figure()
