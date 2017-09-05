@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Thu Aug 24 13:56:28 2017
 
-@author: jdkern
+@author: samblank
 """
 
 import matplotlib.pyplot as plt
@@ -45,7 +46,7 @@ for i in range(0,12):
     for j in range(0,years-1):
         differences[i,j] = (x[i,j+1] - x[i,j])/x[i,j]*100
         
-
+'''
 #create new figure
 plt.figure()
 labels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
@@ -61,7 +62,7 @@ plt.xticks(range(0,years,2), ticklabels)
 plt.legend(prop={'size': 20})
 plt.rc('xtick', labelsize=24)
 plt.rc('ytick', labelsize=24)
-
+'''
 
 #annual demand percentages
 totals = np.sum(x,axis=0)
@@ -69,7 +70,7 @@ monthly_fractions = np.zeros((months,years));
 
 for i in range(0,years):
     monthly_fractions[:,i] = x[:,i]/totals[i]*100;
-
+'''
 #create new figure
 plt.figure() 
 
@@ -83,7 +84,7 @@ plt.xticks(range(0,years,2), ticklabels)
 plt.legend(prop={'size': 20})
 plt.rc('xtick', labelsize=24)
 plt.rc('ytick', labelsize=24)
-
+'''
 
 #Simulation
 
@@ -94,7 +95,7 @@ for i in range(0,sim_years):
     for j in range(0,12):
         s = int(np.ceil(sim_years*np.random.uniform()))
         bootstrap_sample[i*12+j] = x[j,s]
-
+'''
 plt.figure()
 #bootstrap sample
 plt.plot(bootstrap_sample)
@@ -106,30 +107,36 @@ plt.figure()
 autocorrelation_plot(x,c=np.random.rand(3,1))
 plt.xlabel('Months',fontsize= 30)
 plt.ylabel('Autocorrelation',fontsize=30)
-
+'''
 #monte carlo
-sim_years = 10
-bootstrap_sample = np.zeros((12*sim_years,1))
-
-
-def monthly_stats(x):
+def monthly_stats(stuff):
     output = np.zeros((12,2))
     for j in range(0,12):       
-        output[j,0] = np.average(x[j,:])
-        output[j,1] = np.std(x[j,:])
-                
+        output[j,0] = np.average(stuff[j,:])
+        output[j,1] = np.std(stuff[j,:])           
     return output
 
 s = monthly_stats(x)
 
-for i in range(0,sim_years):
-    for j in range(0,12):
+monteCarlo = np.zeros((12,10))
+for i in range(0,12):
         # Use monthly stats (mean, std. deviation) to simulate a random value for each calendar month
-        bootstrap_sample[i*12+j] = s[] + s[]*np.random.randn()
-        
+    monteCarlo[i,:] = np.random.normal(s[i,0],s[i,1],10)
+
+data = []
+
+for i in range(0,12):
+    for j in range(0,10):
+        value = monteCarlo[i,j]
+        data.append(value)
 
 plt.figure()
 #bootstrap sample
-plt.plot(bootstrap_sample)
-plt.xlabel('Months',fontsize=30)
-plt.ylabel('Demand (MWh)',fontsize=30)
+plt.plot(monteCarlo)
+plt.xlabel('Months')
+plt.ylabel('Demand (MWh)')
+
+plt.figure()
+autocorrelation_plot(data)
+
+
