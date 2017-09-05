@@ -111,8 +111,7 @@ plt.ylabel('Autocorrelation',fontsize=30)
 sim_years = 10
 bootstrap_sample = np.zeros((12*sim_years,1))
 
-# Sam, I'd make use of your monthly stats function from Lecture 3
-#monthly stats function
+
 def monthly_stats(x):
     output = np.zeros((12,2))
     for j in range(0,12):       
@@ -127,7 +126,7 @@ for i in range(0,sim_years):
     for j in range(0,12):
         # Use monthly stats (mean, std. deviation) to simulate a random value for each calendar month
         bootstrap_sample[i*12+j] = s[] + s[]*np.random.randn()
-#RIGHT ABOVE HERE JORDAN
+        
 
 plt.figure()
 #bootstrap sample
