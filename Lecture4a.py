@@ -101,13 +101,13 @@ plt.figure()
 plt.plot(bootstrap_sample)
 plt.xlabel('Months',fontsize=30)
 plt.ylabel('Demand (MWh)',fontsize=30)
-
+'''
 plt.figure()
 #autocorrelation
 autocorrelation_plot(x,c=np.random.rand(3,1))
 plt.xlabel('Months',fontsize= 30)
 plt.ylabel('Autocorrelation',fontsize=30)
-'''
+
 #monte carlo
 def monthly_stats(stuff):
     output = np.zeros((12,2))
