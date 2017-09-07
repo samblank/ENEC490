@@ -151,5 +151,3 @@ plt.scatter(avgtemp, peakHours)
 plt.xlabel('Average Daily Temperature', fontsize=10)
 plt.ylabel('Peak Electricity Demand', fontsize=10)
 plt.title('Scatterplot of Average Daily Temp and Electrcity Demand', fontsize=10)
-# We see here that the plot is the opposite shape of the electrcity frequency vs. demand data.
-#This makes sense because during times of mild temperatures, we don't use as much electricity.
