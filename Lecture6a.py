@@ -3,7 +3,7 @@
 from __future__ import division
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
-import pandas as pd 
+import pandas as pd
 import numpy as np
 import scipy.stats as stats
 
@@ -23,7 +23,7 @@ def mat2vec(data):
     vector = []
     for i in range(0,rows):
         vector = np.append(vector,data[i,:])
-     
+
     return vector
 
 vector_demand = mat2vec(demand)
@@ -44,7 +44,7 @@ combined = np.column_stack((temps,peaks))
 for i in range(0,len(combined)):
     if np.isnan(combined[i,1]) > 0:
         combined[i,1] = np.mean([combined[i-1,1],combined[i+1,1]])
-        
+
 #clusters for each row
 IDX = KMeans(n_clusters=3, random_state=0).fit_predict(combined)
 
@@ -81,29 +81,18 @@ plt.scatter(hours, July_Avg)
 '''change nans to zeros - this is okay because averaging 
 surrounding values to find a morea ccurate guess would not
  yield a new max'''
-demand[np.isnan(demand)] = 0
 
-# max value of each day
-maxofday = np.zeros((365, 1))
-for i in range(0, 365):
-    maxofday[i] = np.max(demand[i, :])
-    
 
-boxData = [[maxofday[4::7]],
-           [maxofday[5::7]],
-           [maxofday[6::7]],
-           [maxofday[7::7]],
-           [maxofday[1::7]],
-           [maxofday[2::7]],
-           [maxofday[3::7]]]
+
+boxData = [[combined[4::7,1]],
+           [combined[5::7,1]],
+           [combined[6::7,1]],
+           [combined[7::7,1]],
+           [combined[1::7,1]],
+           [combined[2::7,1]],
+           [combined[3::7,1]]]
 
 #%% plot of max of each day by day of week
 plt.figure()
 plt.boxplot(boxData)
-
-#,maxofday[cv==2],maxofday[cv==3],maxofday[cv==4],maxofday[cv==5],maxofday[cv==6],maxofday[cv==7]
-
-
-
-
-
+plt.show()
