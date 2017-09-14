@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
-
-
-
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -47,7 +41,7 @@ plt.ylabel('Capacity (MW)', fontsize=24)
 d_2012 = set([tuple(line) for line in df_2012.values.tolist()])
 d_2015 = set([tuple(line) for line in df_2015.values.tolist()])
 
-##
+
 
 # a is a 'set'
 a = d_2012.difference(d_2015)
@@ -55,6 +49,7 @@ a = d_2012.difference(d_2015)
 retired = np.array(list(a))
 
 bins2 = np.zeros((len(years), 1))
+
 
 #repeat for 2015
 for i in range(0, len(retired)):
@@ -65,7 +60,16 @@ for i in range(0, len(retired)):
     bin_number = years.index(yr)
 
     # adds capacity to correct 'bin'
-    bins2[bin_number] = bins[bin_number] + retired[i,2]
+    bins2[bin_number] = bins2[bin_number] + retired[i,2]
 
+ypos=np.arange(len(years))
 plt.figure()
-plt.hist([bins,bins2])
+plt.bar(ypos,bins)
+plt.bar(ypos,bins2)
+tick_range = range(0, len(years), 5)
+year_ticks = range(1925, 2013, 5)
+plt.xticks(tick_range, year_ticks)
+plt.xlabel('Year', fontsize=24)
+plt.ylabel('Capacity (MW)', fontsize=24)
+plt.title('Existing coal capacity by operating year')
+plt.show()
