@@ -1,10 +1,4 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Sep 14 14:02:11 2017
 
-@author: jehill17
-"""
 
 from __future__ import division
 import matplotlib.pyplot as plt
@@ -148,8 +142,7 @@ name4 = months[idx]
 names.append(name4)
 
 plt.figure()
-bins = np.histogram(np.hstack((back_transformed1, back_transformed2, back_transformed3, back_transformed4)), bins=100)[
-    1]
+bins = np.histogram(np.hstack((back_transformed1, back_transformed2, back_transformed3, back_transformed4)), bins=100)[1]
 plt.hist(back_transformed1, bins)
 plt.hist(back_transformed2, bins)
 plt.hist(back_transformed3, bins)
