@@ -216,7 +216,7 @@ plt.ylabel('Autocorrelation',fontsize=14)
 
 
 ##################################################
-
+# smooth the data with a moving avg maybe, or you can calc mean for each 24 hr period and clip it
 plt.figure()
 
 for i in range(0,12):
